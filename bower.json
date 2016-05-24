@@ -1,0 +1,21 @@
+{
+  "name": "jquery-historica",
+  "license": "MIT",
+  "authors": [
+    "Matt Graham <matt@gorocketcloud.com>"
+  ],
+  "description": "A simple historical timeline plugin.",
+  "homepage": "http://jqueryboilerplate.com",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "history",
+    "jquery-plugin",
+    "jquery-historica"
+  ],
+  "main": "src/jquery.historica.js",
+  "dependencies": {
+    "jquery": "1"
+  },
+  "ignore": []
+}
