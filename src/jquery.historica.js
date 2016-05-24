@@ -26,77 +26,78 @@
 				lineClass: 'historica_line',
 				intervalIndicatorClass: 'historica_indicator',
 				milestoneClass: 'historica_milestone',
-				milstoneWrapperClass: 'historica_milestone_wrapper',
+				milestoneWrapperClass: 'historica_milestone_wrapper',
+				milestoneBoxID: 'historica_content_box',
 				milestones: [
 					{ 
 						year: 1900,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 1909,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 1909,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 1922,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 1925,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 1925,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 1950,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 1982,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 1982,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					},
 					{ 
 						year: 2015,
 						milestonedate: "May 24, 1900",
 						title: 'Something Happened!',
 						description: "All the good in the world came to a halt to wonder at it's creation.",
-						imageUrl: "/images/something.jpg"
+						imageUrl: "./images/something.jpg"
 					}
 				]
 			};
@@ -115,19 +116,9 @@
 		// Avoid Plugin.prototype conflicts
 		$.extend( Plugin.prototype, {
 			init: function() {
-
-				// Place initialization logic here
-				// You already have access to the DOM element and
-				// the options via the instance, e.g. this.element
-				// and this.settings
-				// you can add more functions like the one below and
-				// call them like the example below
-				this.draw();
-			},
-			draw: function(  ) {
 				var self = this;
 				// setup container div
-				$( this.element ).css({'position': 'relative', 'margin': '0 1%'});
+				$( this.element ).addClass('historica_wrapper');
 				
 				// draw the line, start and end markers
 				$( this.element ).append('<div class="' + this.settings.lineClass + '"></div>');
@@ -145,9 +136,8 @@
 				$.each(this.settings.milestones, function(index, value) {
 					self.milestoneMarker( value.year - self.settings.startYear, index );
 				});
-				
 			},
-			
+						
 			intervalMarker: function( year, writeYear ) {
 				writeYear = (typeof writeYear === 'undefined') ? false : true;
 				
@@ -158,13 +148,45 @@
 			},
 			
 			milestoneMarker: function( year, index ) {
+				var self = this;
 				if ( ! $( "#milestone-year-" + year ).length ) {
 					var setLeft = year * this.percentPerYear;
-					$( this.element ).append('<div class="' + this.settings.milstoneWrapperClass + '" id="milestone-year-' + year + '"></div>');
+					$( this.element ).append('<div class="' + this.settings.milestoneWrapperClass + '" id="milestone-year-' + year + '"></div>');
 					$( "#milestone-year-" + year ).css({left: setLeft + "%"});
 				}
 				
-				$( "#milestone-year-" + year ).append('<div class="' + this.settings.milestoneClass + '" id="milestone-index-' + index + '">&bull;</div>');
+				$( "#milestone-year-" + year ).append('<div class="' + this.settings.milestoneClass + '" id="milestone-index-' + index + '"></div>');
+				$( '#milestone-index-' + index ).data('milestone', this.settings.milestones[index]);
+				$( '#milestone-index-' + index ).on('click', function() {
+					
+					if ( ! $( "#" + self.settings.milestoneBoxID ).length ) {
+						self.createContentBox();
+					}
+					
+					var contentbox = $( "#" + self.settings.milestoneBoxID );
+					
+					contentbox.children('img').attr('src', $(this).data('milestone').imageUrl);
+					contentbox.children('h2').text($(this).data('milestone').year);
+					contentbox.children('h3').text($(this).data('milestone').title);
+					contentbox.children('p').text($(this).data('milestone').description);
+					
+					var goleft = parseFloat($(this).parent().css('left')) - (parseFloat(contentbox.css('width')) / 2);
+					if (goleft < 0) { 
+						goleft = 0; 
+					} else if (goleft > (parseFloat($(self.element).width()) - (parseFloat(contentbox.css('width'))))) {
+						goleft = parseFloat($(self.element).width()) - (parseFloat(contentbox.css('width')));
+					}
+					contentbox.animate({'left': goleft+'px'});
+				});
+			},
+			
+			createContentBox: function() {
+				$( this.element ).append('<div id="' + this.settings.milestoneBoxID + '"></div>');
+				var contentbox = $( '#' + this.settings.milestoneBoxID );
+				contentbox.append("<img />");
+				contentbox.append("<h2 />");
+				contentbox.append("<h3 />");
+				contentbox.append("<p />");
 			}
 		} );
 

@@ -1,5 +1,14 @@
-@linetop: 30px;
-@linestyle: 2px solid orange;
+@linetop: 380px;
+@linestyle: 2px solid #f9a127;
+@textcolor: #24365c;
+@hovercolor: #16abd2;
+@boxborder: 3px solid #16abd2;
+@boxtop: 30px;
+
+.historica_wrapper {
+	position: relative;
+	margin: 0 4em;
+}
 
 .historica_line {
 	height: 10px;
@@ -25,15 +34,56 @@
 
 .historica_milestone_wrapper {
 	position: absolute;
-	top: @linetop + 6px;
+	top: @linetop + 5px;
 }
 
 .historica_milestone {
 	position: relative;
-	color: black;
+	background-color: @textcolor;
 	width: 12px;
-	height: 15px;
-	line-height: 12px;
-	font-size: 36px;
-	margin-left: -5px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: 5px;
+	cursor: pointer;
+	
+	&:hover {
+		background-color: @hovercolor;
+	}
+}
+
+#historica_content_box {
+	width: 265px;
+	height: 128px;
+	padding-top: 150px;
+	border: @boxborder;
+	position: absolute;
+	top: @boxtop;
+	
+	img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		display: block;
+		z-index: 2;
+	}
+	
+	h2 {
+		position: absolute;
+		top: 108px;
+		left: 23px;
+		font-size: 19px;
+	    background-color: @hovercolor;
+	    width: 2.7em;
+	    text-align: center;
+	    border-radius: 3px;
+	    color: white;
+	    z-index: 5;
+	}
+	
+	h3, p {
+		padding: 10px 25px 5px;
+		margin: 0;
+	}
 }
