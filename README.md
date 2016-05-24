@@ -41,8 +41,4 @@ The basic structure of the project is given in the following way:
 
 ## Team
 
-jQuery Boilerplate was made with love by me and hopefully at some point a bunch of awesome [contributors](https://github.com/jquery-boilerplate/boilerplate/graphs/contributors).
-
-## History
-
-Check [Releases](https://github.com/jquery-boilerplate/jquery-boilerplate/releases) for detailed changelog.
+jQuery Boilerplate was made with love by me and hopefully at some point a bunch of awesome [contributors](https://github.com/themattyg/jquery-historica/graphs/contributors).
