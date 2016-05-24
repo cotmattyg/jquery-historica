@@ -41,4 +41,4 @@ The basic structure of the project is given in the following way:
 
 ## Team
 
-jQuery Boilerplate was made with love by me and hopefully at some point a bunch of awesome [contributors](https://github.com/themattyg/jquery-historica/graphs/contributors).
+jQuery Historica was made with love by me and hopefully at some point a bunch of awesome [contributors](https://github.com/themattyg/jquery-historica/graphs/contributors).
