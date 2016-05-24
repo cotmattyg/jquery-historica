@@ -21,7 +21,7 @@ I’m sure I’ll write something witty here at some point. Just not right now.
 3. Call the plugin:
 
 	```javascript
-	$("#element”).historica();
+	$(“#element”).historica();
 	```
 
 ## Structure
