@@ -2,14 +2,15 @@
 <html>
 	<head>
 		<title>jQuery Boilerplate</title>
-		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-		<script src="../src/jquery.boilerplate.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script src="../src/jquery.historica.js"></script>
+		<link rel="stylesheet" href="../dist/jquery.historica.css" />
 	</head>
 	<body>
 		<div id="element"></div>
 		<script>
 			$( function() {
-				$( "#element" ).defaultPluginName( {
+				$( "#element" ).historica( {
 					propertyName: "a custom value"
 				} );
 			} );
